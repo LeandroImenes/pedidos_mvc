@@ -1,0 +1,17 @@
+[
+    {
+        "id":1,
+        "cpf":"111.222.333-44",
+        "nome":"Aura Dias"
+    },
+    {
+        "id":2,
+        "cpf":"111.222.333-44",
+        "nome":"Ronaldo da Penha"
+    },
+    {
+        "id":3,
+        "cpf":"333.444.555-66",
+        "nome":"João sem Braço"
+    }
+]
