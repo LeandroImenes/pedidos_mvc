@@ -1,37 +1,32 @@
 const pedidos = require("../../dados/pedidos.json")
 
-function subtotais(){
-    pedidos.forEach(p=>{
-        p.subtotal = p.quantidade * p.preco
-    })
-}
-
 const criar = (req, res) => {
     const dados = req.body
-    dados.id = Number(pedidos[pedidos.length - 1]) + 1 //auto increment
+    dados.id = Number(pedidos[pedidos.length - 1].id) + 1 //auto increment
     pedidos.push(dados)
     res.status(201).json(dados)}
+
 const listar = (req, res) => {
     subtotais()
     res.json(pedidos)
 }
+
 const alterar = (req, res) => {
     const id = Number(req.params.id)
     const dados = req.body
-    const indice = pedidos.findIndex(pedido => Number(pedido.id) === id)
+
+    const indice = pedidos.findIndex(
+        pedido => Number(pedido.id) === id
+    )
     if (indice === -1) {
         return res.status(404).json({
             mensagem: "Pedido não encontrado"
         })
     }
-    pedidos[indice] = {
-        ...pedidos[indice],
-        ...dados,
-        id: pedidos[indice].id
-    }
-    pedidos[indice].subtotal =
-        pedidos[indice].quantidade * pedidos[indice].preco
-
+    pedidos[indice].cliente_id = dados.cliente_id
+    pedidos[indice].produto = dados.produto
+    pedidos[indice].quantidade = dados.quantidade
+    pedidos[indice].preco = dados.preco
     res.json(pedidos[indice])
 }
 

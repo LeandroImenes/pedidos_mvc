@@ -6,25 +6,28 @@ const criar = (req, res) => {
     clientes.push(dados)
     res.status(201).json(dados)
 }
+
 const listar = (req, res) => {
     res.json(clientes)
 }
+
 const alterar = (req, res) => {
     const id = Number(req.params.id)
     const dados = req.body
-    const indice = clientes.findIndex(clientes => Number(clientes.id) === id)
-    if (indice === -1){
+
+    const indice = clientes.findIndex(
+        cliente => Number(cliente.id) === id
+    )
+    if (indice === -1) {
         return res.status(404).json({
             mensagem: "Cliente não encontrado"
         })
     }
-    cliente[indice] = {
-        ...clientes[indice],
-        ...dados,
-        id: clientes[indice].id
-    }
-    res.json("Em construção")
+    clientes[indice].cpf = dados.cpf
+    clientes[indice].nome = dados.nome
+    res.json(clientes[indice])
 }
+
 const excluir = (req, res) => {
     const id = Number(req.params.id)
     const indice = clientes.findIndex(cliente => Number(cliente.id) === id)
